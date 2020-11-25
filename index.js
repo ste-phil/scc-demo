@@ -1,3 +1,9 @@
+
+const clipboard = new ClipboardJS('.to-clipboard', {
+    text: function(trigger) {
+        return JSON.stringify(repository.getRecipes())
+    }
+});
 const app = Vue.createApp({})
 app.mixin(repositoryMixin)
 
@@ -6,6 +12,42 @@ app.component('button-mock', {
       <button @click="repository.addRecipeMock()">
         Add mock recipe
       </button>`
+})
+
+app.component('button-img', {
+    props: ["icon", "popover-text", "text"],
+    template: `
+      <button :popover-bottom="popoverText">
+        <i :class="icon" style="float:left;margin-right:10px;"></i>
+        <label>{{text}}</label>
+      </button>`
+})
+
+
+app.component('button-bar', {
+    methods: {
+        addRecipe() {
+            alert("Not implemented! :/")
+        },
+        importRecipes() {
+            
+        }
+    },
+    template: `
+    <div style="height:50px;">
+        <button-img @click="addRecipe()" style="float:left;margin:3px;height:100%;" icon="gg-add" text="Add" popover-text="Add new Recipe" popover-position="popover-bottom"></button-img>
+
+        <button-img class="to-clipboard" style="float:left;margin:3px;height:100%;" icon="gg-export" popover-text="Export Recipe" popover-position="popover-bottom"></button-img>
+        <button-img @click="importRecipes()" style="float:left;margin:3px;height:100%;" icon="gg-import" popover-text="Import Recipe" popover-position="popover-bottom"></button-img>
+    </div>`
+})
+
+app.component('notification-bar', {
+    props: [],
+    template: `
+      <div style="position: fixed; bottom: 0px;">
+
+      </div>`
 })
 
 app.component('recipe-list', {
@@ -63,7 +105,7 @@ var chainInput = {
     template: `
         <div class="form-group">
             <label for="recipeName">Recipe to make</label>
-            <input v-model="recipeName" placeholder="Select Recipe" list="recipes"></input>
+            <input v-model="recipeName" placeholder="Select Recipe" list="recipes">
             <datalist id="recipes" >
                 <option v-for="recipe in this.repository.getRecipes()" :value="recipe.name" :data-id="recipe.id"></option>
             </datalist>

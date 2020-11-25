@@ -3,21 +3,24 @@
     <head>
         <title>SupplierCalc</title>
         <script src="https://unpkg.com/vue@next"></script>
-        <script src="https://unpkg.com/vue-router@next"></script>
+        <script src="https://unpkg.com/clipboard@2/dist/clipboard.min.js"></script>
 
+        <link href='https://unpkg.com/css.gg/icons/all.css' rel='stylesheet'>
         <link rel="stylesheet" href="paper.min.css">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         
-        <div id="app" class="row " style="margin-bottom: 0px;">
+        <div id="app" class="row" style="margin-bottom: 0px;">
             <div class="lg-2 sm-4 col sb2" style="height: 100vh; overflow-y: auto;">
-                <button-mock></button-mock>
+                <button-bar></button-bar>
                 <recipe-list></recipe-list>
             </div>
             <div class="col-fill col"> 
                 <chain-resolver></chain-resolver>
             </div>
+
+            <notification-bar></notification-bar>>
         </div>
         
         <script src="repository.js"></script>

@@ -42,11 +42,21 @@ const repository = {
         ]
     }),
 
+    importRecipes(recipeString, mode) {
+        var importedRecipes = JSON.parse(recipeString);
+
+        if (mode == "override") this.state.recipes = importedRecipes;
+        else if (mode == "extend") this.state.recipes.push(importedRecipes);
+    },
+
+    addRecipe(name, time, amount, inputs) {
+        this.state.recipes.push({id: this.state.recipes[this.state.recipes.length - 1].id + 1, name, time, amount, inputs})
+    },
 
     getRecipes() {
         return this.state.recipes;
     },
-
+    
     findRecipe(id) {
         return this.state.recipes.filter(x => x.id == id)[0];
     },
